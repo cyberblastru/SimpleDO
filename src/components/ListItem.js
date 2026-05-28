@@ -5,15 +5,7 @@ import {
   View,
 } from 'react-native';
 
-import type { Item } from '../types/item';
-
-type ListItemProps = {
-  item: Item;
-  onToggle: (id: string) => void;
-  onDelete: (id: string) => void;
-};
-
-export function ListItem({ item, onToggle, onDelete }: ListItemProps) {
+export function ListItem({ item, onToggle, onDelete }) {
   return (
     <View style={styles.row}>
       <Pressable

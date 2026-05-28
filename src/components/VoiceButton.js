@@ -1,12 +1,6 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
-type VoiceButtonProps = {
-  isListening: boolean;
-  onPressIn: () => void;
-  onPressOut: () => void;
-};
-
-export function VoiceButton({ isListening, onPressIn, onPressOut }: VoiceButtonProps) {
+export function VoiceButton({ isListening, onPressIn, onPressOut }) {
   return (
     <Pressable
       accessibilityHint="Удерживайте и говорите список через слово плюс"

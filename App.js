@@ -21,7 +21,7 @@ export default function App() {
   const { isListening, error, startListening, stopListening } = useVoiceInput();
 
   const handleVoiceComplete = useCallback(
-    (text: string) => {
+    (text) => {
       const parsed = parseVoiceText(text);
       if (parsed.length === 0) {
         return;

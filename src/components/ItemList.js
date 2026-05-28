@@ -1,15 +1,8 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-import type { Item } from '../types/item';
 import { ListItem } from './ListItem';
 
-type ItemListProps = {
-  items: Item[];
-  onToggle: (id: string) => void;
-  onDelete: (id: string) => void;
-};
-
-export function ItemList({ items, onToggle, onDelete }: ItemListProps) {
+export function ItemList({ items, onToggle, onDelete }) {
   if (items.length === 0) {
     return (
       <View style={styles.empty}>

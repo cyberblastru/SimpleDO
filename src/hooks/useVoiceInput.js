@@ -4,13 +4,11 @@ import {
 } from 'expo-speech-recognition';
 import { useCallback, useRef, useState } from 'react';
 
-type CompleteHandler = (text: string) => void;
-
 export function useVoiceInput() {
   const [isListening, setIsListening] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const transcriptRef = useRef('');
-  const onCompleteRef = useRef<CompleteHandler | null>(null);
+  const onCompleteRef = useRef(null);
   const isListeningRef = useRef(false);
   const isStartingRef = useRef(false);
 
@@ -62,7 +60,7 @@ export function useVoiceInput() {
     transcriptRef.current = '';
   });
 
-  const startListening = useCallback(async (onComplete: CompleteHandler) => {
+  const startListening = useCallback(async (onComplete) => {
     if (isListeningRef.current || isStartingRef.current) {
       return;
     }

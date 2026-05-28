@@ -1,6 +1,6 @@
 const SEPARATOR = /\s*(?:\+|плюс|plus|и)\s*/gi;
 
-export function parseVoiceText(text: string): string[] {
+export function parseVoiceText(text) {
   return text
     .replace(SEPARATOR, '|')
     .split('|')

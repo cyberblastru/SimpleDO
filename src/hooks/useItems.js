@@ -1,13 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCallback, useEffect, useState } from 'react';
 
-import type { Item } from '../types/item';
 import { createId } from '../utils/id';
 
 const STORAGE_KEY = 'simpledo-items';
 
 export function useItems() {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ export function useItems() {
           return;
         }
 
-        const parsed = JSON.parse(raw) as Item[];
+        const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {
           setItems(parsed);
         }
@@ -44,13 +43,13 @@ export function useItems() {
     AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(items)).catch(() => {});
   }, [items, loaded]);
 
-  const addItems = useCallback((texts: string[]) => {
+  const addItems = useCallback((texts) => {
     if (texts.length === 0) {
       return;
     }
 
     const now = Date.now();
-    const newItems: Item[] = texts.map((text, index) => ({
+    const newItems = texts.map((text, index) => ({
       id: createId(),
       text,
       done: false,
@@ -60,7 +59,7 @@ export function useItems() {
     setItems((current) => [...current, ...newItems]);
   }, []);
 
-  const toggleItem = useCallback((id: string) => {
+  const toggleItem = useCallback((id) => {
     setItems((current) =>
       current.map((item) =>
         item.id === id ? { ...item, done: !item.done } : item,
@@ -68,7 +67,7 @@ export function useItems() {
     );
   }, []);
 
-  const deleteItem = useCallback((id: string) => {
+  const deleteItem = useCallback((id) => {
     setItems((current) => current.filter((item) => item.id !== id));
   }, []);
 
